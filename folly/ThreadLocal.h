@@ -1,11 +1,11 @@
 /*
- * Copyright (c) Facebook, Inc. and its affiliates.
+ * Copyright 2011-present Facebook, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *   http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -64,7 +64,7 @@ class ThreadLocal {
   explicit ThreadLocal(F&& constructor)
       : constructor_(std::forward<F>(constructor)) {}
 
-  FOLLY_ERASE T* get() const {
+  FOLLY_ALWAYS_INLINE FOLLY_ATTR_VISIBILITY_HIDDEN T* get() const {
     auto const ptr = tlp_.get();
     return FOLLY_LIKELY(!!ptr) ? ptr : makeTlp();
   }
